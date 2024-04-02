@@ -55,3 +55,10 @@ def update(movie_id: int, new_movie_info: Movie):
             m["genre"] = new_movie_info.genre
             return {"message": "Movie updated successfully"}
     raise HTTPException(status_code=404, detail=f"Movie with id={movie_id} not found")
+
+
+@app.delete("/movies/{movie_id}")
+def delete(movie_id: int):
+    global movies
+    movies = [m for m in movies if m["id"] != movie_id]
+    return {"message": "Movie deleted successfully"}
