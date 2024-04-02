@@ -4,33 +4,44 @@ from pydantic import BaseModel
 app = FastAPI()
 
 
-class Item(BaseModel):
-    text: str = None
-    is_done: bool = False
+# Dummy movie data
+movies = [
+    {"id": 1, "title": "The Shawshank Redemption", "genre": "Drama"},
+    {"id": 2, "title": "The Godfather", "genre": "Crime"},
+    {"id": 3, "title": "Star Wars: Episode VI – Return of the Jedi", "genre": "Sci-Fi, Action"},
+]
+next_id = 4  # Next available id
 
 
-items = []
+class Movie(BaseModel):
+    id: int = next_id
+    title: str = None
+    genre: str = None
 
 
+# Routes
 @app.get("/")
 def root():
-    return {"Hello": "World"}
+    return {"message": "Welcome to the Movie Recommendation System API"}
 
 
-@app.post("/items")
-def create(item: Item):
-    items.append(item)
-    return items
+@app.get("/movies", response_model=list[Movie])
+def get_all():
+    return movies
 
 
-@app.get("/items", response_model=list[Item])
-def get_all(limit: int = 10):
-    return items[0:limit]
+@app.get("/movies/{movie_id}", response_model=Movie)
+def get_by_id(movie_id: int) -> Movie:
+    for movie in movies:
+        if movie["id"] == movie_id:
+            return movie
+    raise HTTPException(status_code=404, detail=f"Movie with id={movie_id} not found")
 
 
-@app.get("/items/{item_id}", response_model=Item)
-def get_by_id(item_id: int) -> Item:
-    if item_id < len(items):
-        return items[item_id]
-    else:
-        raise HTTPException(status_code=404, detail=f"Item {item_id} not found")
+@app.post("/movies")
+def create(movie: Movie):
+    global next_id
+    new_movie = {"id": next_id, "title": movie.title, "genre": movie.genre}
+    movies.append(new_movie)
+    next_id += 1
+    return new_movie
