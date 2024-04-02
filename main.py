@@ -14,7 +14,7 @@ next_id = 4  # Next available id
 
 
 class Movie(BaseModel):
-    id: int = next_id
+    id: int
     title: str = None
     genre: str = None
 
@@ -32,9 +32,9 @@ def get_all():
 
 @app.get("/movies/{movie_id}", response_model=Movie)
 def get_by_id(movie_id: int) -> Movie:
-    for movie in movies:
-        if movie["id"] == movie_id:
-            return movie
+    for m in movies:
+        if m["id"] == movie_id:
+            return m
     raise HTTPException(status_code=404, detail=f"Movie with id={movie_id} not found")
 
 
@@ -45,3 +45,13 @@ def create(movie: Movie):
     movies.append(new_movie)
     next_id += 1
     return new_movie
+
+
+@app.put("/movies/{movie_id}")
+def update(movie_id: int, new_movie_info: Movie):
+    for m in movies:
+        if m["id"] == movie_id:
+            m["title"] = new_movie_info.title
+            m["genre"] = new_movie_info.genre
+            return {"message": "Movie updated successfully"}
+    raise HTTPException(status_code=404, detail=f"Movie with id={movie_id} not found")
