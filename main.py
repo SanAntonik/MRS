@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+import frontend
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
@@ -62,3 +64,10 @@ def delete(movie_id: int):
     global movies
     movies = [m for m in movies if m["id"] != movie_id]
     return {"message": "Movie deleted successfully"}
+
+
+frontend.init(app)
+
+
+if __name__ == '__main__':
+    print('Please start the app with the "uvicorn" command as shown in the start.sh script')
