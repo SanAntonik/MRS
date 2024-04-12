@@ -62,6 +62,8 @@ def create_item(
     """
     Create new item.
     """
+    if not current_user.is_superuser:
+        raise HTTPException(status_code=400, detail="Not enough permissions")
     item = Item.model_validate(item_in, update={"owner_id": current_user.id})
     session.add(item)
     session.commit()
