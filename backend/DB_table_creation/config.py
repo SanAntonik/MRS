@@ -4,7 +4,7 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    MOVIES_DATA_PATH: str = "C:/Users/San/Documents/CS projects/MRS/DA_skill_showcase/data/data.csv"
+    MOVIES_DATA_PATH: str = "C:/Users/San/Documents/CS projects/MRS/DA_skill_showcase/data/recommender_data.csv"
     POSTGRES_SERVER: str = "localhost"
     POSTGRES_PORT: int = 5432
     POSTGRES_USER: str = "postgres"
