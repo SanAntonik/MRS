@@ -1,13 +1,12 @@
-Reasoning for dublicating files:
-Because of problems with importing files from parent directory.
-I encountered them when I tried to run 'backend_pre_start.py'
-and 'initial_data.py'. Strangely enough, when I enter 
-'uvicorn app.main:app --reload', there are no such
-problems. Thus, after some time, I decided to follow an easy way
-and just dublicate the files needed to run those two python
-files mentioned above.
+Reasoning for Dublicating Files:
+I encountered problems with importing files from the parent directory
+when trying to run 'backend_pre_start.py' and 'initial_data.py'.
+Strangely enough, when I enter 'uvicorn app.main:app --reload',
+there are no such problems. After some time, I decided to take
+an easy way out and just duplicated the files needed to run
+those two Python files mentioned above.
 
-Now that thought process for making dublicate files
-is explained, time for instructions of how to create DB tables
-1. Create DB and call it 'app' in pgAdmin4
-2. Run initial_data.py
+Now that the thought process for dublicating files is explained,
+it's time for instructions on how to create DB tables:
+1. Create a database and call it 'app' in pgAdmin4.
+2. Run initial_data.py.
