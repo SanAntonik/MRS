@@ -3,6 +3,7 @@
 *.vscode/
 *.cfg
 *.zip
+*.csv
 
 
 # BACKEND
