@@ -9,4 +9,4 @@ those two Python files mentioned above.
 Now that the thought process for dublicating files is explained,
 it's time for instructions on how to create DB tables:
 1. Create a database and call it 'app' in pgAdmin4.
-2. Run initial_data.py.
+2. Run initiate.py.
