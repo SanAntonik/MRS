@@ -28,6 +28,7 @@ class User(UserBase, table=True):
 # Shared properties
 class ItemBase(SQLModel):
     title: str
+    franchise: str | None = None
     release_date: date | None = None
     runtime: int | None = None
     genres: str | None = None
@@ -45,6 +46,7 @@ class ItemBase(SQLModel):
 class Item(ItemBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
     title: str
+    franchise: str | None = None
     release_date: date | None = None
     runtime: int | None = None
     genres: str | None = None
