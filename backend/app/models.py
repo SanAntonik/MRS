@@ -63,6 +63,7 @@ class UsersOut(SQLModel):
 # Shared properties
 class ItemBase(SQLModel):
     title: str
+    franchise: str | None = None
     release_date: date | None = None
     runtime: int | None = None
     genres: str | None = None
@@ -79,6 +80,7 @@ class ItemBase(SQLModel):
 # Properties to receive on item creation
 class ItemCreate(ItemBase):
     title: str
+    franchise: str | None = None
     release_date: date | None = None
     runtime: int | None = None
     genres: str | None = None
@@ -95,6 +97,7 @@ class ItemCreate(ItemBase):
 # Properties to receive on item update
 class ItemUpdate(ItemBase):
     title: str | None = None
+    franchise: str | None = None
     release_date: date | None = None
     runtime: int | None = None
     genres: str | None = None
@@ -112,6 +115,7 @@ class ItemUpdate(ItemBase):
 class Item(ItemBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
     title: str
+    franchise: str | None = None
     release_date: date | None = None
     runtime: int | None = None
     genres: str | None = None
