@@ -15,7 +15,7 @@ import {
 import { FiLogOut, FiMenu } from "react-icons/fi"
 import { useQueryClient } from "@tanstack/react-query"
 
-import Logo from "../../assets/images/fastapi-logo.svg"
+import Logo from "../../assets/images/mrs-high-resolution-logo-transparent_639ced.svg"
 import type { UserOut } from "../../client"
 import useAuth from "../../hooks/useAuth"
 import SidebarItems from "./SidebarItems"
