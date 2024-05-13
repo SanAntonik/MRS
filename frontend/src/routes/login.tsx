@@ -1,7 +1,6 @@
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons"
 import {
   Button,
-  Center,
   Container,
   FormControl,
   FormErrorMessage,
@@ -10,11 +9,9 @@ import {
   Input,
   InputGroup,
   InputRightElement,
-  Link,
   useBoolean,
 } from "@chakra-ui/react"
 import {
-  Link as RouterLink,
   createFileRoute,
   redirect,
 } from "@tanstack/react-router"
@@ -112,11 +109,6 @@ function Login() {
           </InputGroup>
           {error && <FormErrorMessage>{error}</FormErrorMessage>}
         </FormControl>
-        {/* <Center>
-          <Link as={RouterLink} to="/recover-password" color="blue.500">
-            Forgot password?
-          </Link>
-        </Center> */}
         <Button variant="primary" type="submit" isLoading={isSubmitting}>
           Log In
         </Button>
