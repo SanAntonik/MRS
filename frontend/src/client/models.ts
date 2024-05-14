@@ -17,14 +17,28 @@ export type HTTPValidationError = {
 
 export type ItemCreate = {
 	title: string;
-	description?: string | null;
+	franchise?: string | null;
+	release_year?: string | null;
+	genres?: string | null;
+	vote_average?: number;
+	vote_count?: number;
+	director?: string | null;
+	top_actors?: string | null;
+	keywords?: string | null;
 };
 
 
 
 export type ItemOut = {
 	title: string;
-	description?: string | null;
+	franchise?: string | null;
+	release_year?: string | null;
+	genres?: string | null;
+	vote_average?: number;
+	vote_count?: number;
+	director?: string | null;
+	top_actors?: string | null;
+	keywords?: string | null;
 	id: number;
 	owner_id: number;
 };
@@ -33,7 +47,14 @@ export type ItemOut = {
 
 export type ItemUpdate = {
 	title?: string | null;
-	description?: string | null;
+	franchise?: string | null;
+	release_year?: string | null;
+	genres?: string | null;
+	vote_average?: number;
+	vote_count?: number;
+	director?: string | null;
+	top_actors?: string | null;
+	keywords?: string | null;
 };
 
 
