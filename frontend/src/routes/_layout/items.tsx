@@ -43,7 +43,6 @@ function Items() {
   return (
     <>
       {isLoading ? (
-        // TODO: Add skeleton
         <Flex justify="center" align="center" height="100vh" width="full">
           <Spinner size="xl" color="ui.main" />
         </Flex>
@@ -55,7 +54,7 @@ function Items() {
               textAlign={{ base: "center", md: "left" }}
               pt={12}
             >
-              Items Management
+              Movies Management
             </Heading>
             <Navbar type={"Item"} />
             <TableContainer>
@@ -64,7 +63,18 @@ function Items() {
                   <Tr>
                     <Th>ID</Th>
                     <Th>Title</Th>
-                    <Th>Description</Th>
+                    {/* <Th>Franchise</Th> */}
+                    <Th>Year</Th>
+                    {/* <Th>Runtime</Th> */}
+                    <Th>Genres</Th>
+                    {/* <Th>Budget</Th>
+                    <Th>Revenue</Th> */}
+                    {/* <Th>Popularity</Th> */}
+                    <Th>Vote Avg</Th>
+                    <Th>Vote Count</Th>
+                    <Th>Director</Th>
+                    <Th>Top Actors</Th>
+                    {/* <Th>Keywords</Th> */}
                     <Th>Actions</Th>
                   </Tr>
                 </Thead>
@@ -72,10 +82,43 @@ function Items() {
                   {items.data.map((item) => (
                     <Tr key={item.id}>
                       <Td>{item.id}</Td>
-                      <Td>{item.title}</Td>
-                      <Td color={!item.description ? "ui.dim" : "inherit"}>
-                        {item.description || "N/A"}
+                      <Td>{item.title.length > 20 ? `${item.title.substring(0, 20)}...` : item.title}</Td>
+                      {/* <Td color={!item.franchise ? "ui.dim" : "inherit"}>
+                        {item.franchise ? (item.franchise.length > 20 ? `${item.franchise.substring(0, 20)}...` : item.franchise) : "N/A"}
+                      </Td> */}
+                      <Td color={!item.release_year ? "ui.dim" : "inherit"}>
+                        {item.release_year || "N/A"}
                       </Td>
+                      {/* <Td color={!item.runtime ? "ui.dim" : "inherit"}>
+                        {item.runtime || "N/A"}
+                      </Td> */}
+                      <Td color={!item.genres ? "ui.dim" : "inherit"}>
+                        {item.genres ? (item.genres.length > 20 ? `${item.genres.substring(0, 20)}...` : item.genres) : "N/A"}
+                      </Td>
+                      {/* <Td color={!item.budget ? "ui.dim" : "inherit"}>
+                        {item.budget || "N/A"}
+                      </Td>
+                      <Td color={!item.revenue ? "ui.dim" : "inherit"}>
+                        {item.revenue || "N/A"}
+                      </Td> */}
+                      {/* <Td color={!item.popularity ? "ui.dim" : "inherit"}>
+                        {item.popularity || "N/A"}
+                      </Td> */}
+                      <Td color={!item.vote_average ? "ui.dim" : "inherit"}>
+                        {item.vote_average || "N/A"}
+                      </Td>
+                      <Td color={!item.vote_count ? "ui.dim" : "inherit"}>
+                        {item.vote_count || "N/A"}
+                      </Td>
+                      <Td color={!item.director ? "ui.dim" : "inherit"}>
+                        {item.director || "N/A"}
+                      </Td>
+                      <Td color={!item.top_actors ? "ui.dim" : "inherit"}>
+                        {item.top_actors ? (item.top_actors.length > 40 ? `${item.top_actors.substring(0, 40)}...` : item.top_actors) : "N/A"}
+                      </Td>
+                      {/* <Td color={!item.keywords ? "ui.dim" : "inherit"}>
+                        {item.keywords ? (item.keywords.length > 20 ? `${item.keywords.substring(0, 20)}...` : item.keywords) : "N/A"}
+                      </Td> */}
                       <Td>
                         <ActionsMenu type={"Item"} value={item} />
                       </Td>
