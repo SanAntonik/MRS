@@ -14,7 +14,7 @@ import { useMutation } from "@tanstack/react-query"
 
 import { type ApiError, type UpdatePassword, UsersService } from "../../client"
 import useCustomToast from "../../hooks/useCustomToast"
-import { confirmPasswordRules, passwordRules } from "../../utils"
+import { passwordRules } from "../../utils"
 
 interface UpdatePasswordForm extends UpdatePassword {
   confirm_password: string
@@ -27,7 +27,6 @@ const ChangePassword = () => {
     register,
     handleSubmit,
     reset,
-    getValues,
     formState: { errors, isSubmitting },
   } = useForm<UpdatePasswordForm>({
     mode: "onBlur",
@@ -84,20 +83,6 @@ const ChangePassword = () => {
             />
             {errors.new_password && (
               <FormErrorMessage>{errors.new_password.message}</FormErrorMessage>
-            )}
-          </FormControl>
-          <FormControl mt={4} isRequired isInvalid={!!errors.confirm_password}>
-            <FormLabel htmlFor="confirm_password">Confirm Password</FormLabel>
-            <Input
-              id="confirm_password"
-              {...register("confirm_password", confirmPasswordRules(getValues))}
-              placeholder="Password"
-              type="password"
-            />
-            {errors.confirm_password && (
-              <FormErrorMessage>
-                {errors.confirm_password.message}
-              </FormErrorMessage>
             )}
           </FormControl>
           <Button

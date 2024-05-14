@@ -17,19 +17,3 @@ export const passwordRules = (isRequired = true) => {
 
   return rules
 }
-
-export const confirmPasswordRules = (
-  getValues: () => any,
-  isRequired = true,
-) => {
-  const rules: any = {
-    validate: (value: string) =>
-      value === getValues().password || "The passwords do not match",
-  }
-
-  if (isRequired) {
-    rules.required = "Password confirmation is required"
-  }
-
-  return rules
-}
