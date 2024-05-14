@@ -29,12 +29,8 @@ class User(UserBase, table=True):
 class ItemBase(SQLModel):
     title: str
     franchise: str | None = None
-    release_date: date | None = None
-    runtime: int | None = None
+    release_year: str | None = None
     genres: str | None = None
-    budget: int | None = None
-    revenue: int | None = Field(default=None, sa_column=Column(BigInteger()))
-    popularity: float | None = None
     vote_average: float | None = None
     vote_count: int | None = None
     director: str | None = None
@@ -42,17 +38,13 @@ class ItemBase(SQLModel):
     keywords: str | None = None
 
 
-# # Database model, database table inferred from class name
+# Database model, database table inferred from class name
 class Item(ItemBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
     title: str
     franchise: str | None = None
-    release_date: date | None = None
-    runtime: int | None = None
+    release_year: str | None = None
     genres: str | None = None
-    budget: int | None = None
-    revenue: int | None = Field(default=None, sa_column=Column(BigInteger()))
-    popularity: float | None = None
     vote_average: float | None = None
     vote_count: int | None = None
     director: str | None = None
