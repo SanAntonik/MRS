@@ -28,6 +28,6 @@ def init_db(session: Session) -> None:
         user = create_user(session=session, user_create=user_in)
 
     # Fill table 'item' with movie data
-    df = pd.read_csv(settings.MOVIES_DATA_PATH, parse_dates=["release_date"])
+    df = pd.read_csv(settings.MOVIES_DATA_PATH)
     df["owner_id"] = 1  # set admin to be the owner
     df.to_sql(name="item", con=engine, if_exists="append", index=False)
