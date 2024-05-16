@@ -36,7 +36,14 @@ const AddItem = ({ isOpen, onClose }: AddItemProps) => {
     criteriaMode: "all",
     defaultValues: {
       title: "",
-      description: "",
+      franchise: "",
+      release_year: "",
+      genres: "",
+      vote_average: 0,
+      vote_count: 0,
+      director: "",
+      top_actors: "",
+      keywords: "",
     },
   })
 
@@ -73,7 +80,7 @@ const AddItem = ({ isOpen, onClose }: AddItemProps) => {
         <ModalContent as="form" onSubmit={handleSubmit(onSubmit)}>
           <ModalHeader>Add Item</ModalHeader>
           <ModalCloseButton />
-          <ModalBody pb={6}>
+          <ModalBody pb={4}>
             <FormControl isRequired isInvalid={!!errors.title}>
               <FormLabel htmlFor="title">Title</FormLabel>
               <Input
@@ -88,18 +95,86 @@ const AddItem = ({ isOpen, onClose }: AddItemProps) => {
                 <FormErrorMessage>{errors.title.message}</FormErrorMessage>
               )}
             </FormControl>
-            <FormControl mt={4}>
-              <FormLabel htmlFor="description">Description</FormLabel>
+            <FormControl mt={3} isInvalid={!!errors.franchise}>
+              <FormLabel htmlFor="franchise">Franchise</FormLabel>
               <Input
-                id="description"
-                {...register("description")}
-                placeholder="Description"
+                id="franchise"
+                {...register("franchise")}
+                placeholder="Franchise"
+                type="text"
+              />
+            </FormControl>
+            <FormControl mt={3} isRequired isInvalid={!!errors.release_year}>
+              <FormLabel htmlFor="release_year">Release Year</FormLabel>
+              <Input
+                id="release_year"
+                {...register("release_year")}
+                placeholder="Release Year"
+                type="text"
+              />
+            </FormControl>
+            <FormControl mt={3} isInvalid={!!errors.genres}>
+              <FormLabel htmlFor="genres">Genres</FormLabel>
+              <Input
+                id="genres"
+                {...register("genres")}
+                placeholder="Genres"
+                type="text"
+              />
+            </FormControl>
+            <FormControl mt={3} isRequired isInvalid={!!errors.vote_average}>
+              <FormLabel htmlFor="vote_average">Vote Average</FormLabel>
+              <Input
+                id="vote_average"
+                {...register("vote_average", {
+                  valueAsNumber: true,
+                })}
+                placeholder="Vote Average"
+                type="number"
+                step="0.1"
+              />
+            </FormControl>
+            <FormControl mt={3} isRequired isInvalid={!!errors.vote_count}>
+              <FormLabel htmlFor="vote_count">Vote Count</FormLabel>
+              <Input
+                id="vote_count"
+                {...register("vote_count", {
+                  valueAsNumber: true,
+                })}
+                placeholder="Vote Count"
+                type="number"
+              />
+            </FormControl>
+            <FormControl mt={3} isInvalid={!!errors.director}>
+              <FormLabel htmlFor="director">Director</FormLabel>
+              <Input
+                id="director"
+                {...register("director")}
+                placeholder="Director"
+                type="text"
+              />
+            </FormControl>
+            <FormControl mt={3} isInvalid={!!errors.top_actors}>
+              <FormLabel htmlFor="top_actors">Top Actors</FormLabel>
+              <Input
+                id="top_actors"
+                {...register("top_actors")}
+                placeholder="Top 3 Actors"
+                type="text"
+              />
+            </FormControl>
+            <FormControl mt={3} isInvalid={!!errors.keywords}>
+              <FormLabel htmlFor="keywords">Keywords</FormLabel>
+              <Input
+                id="keywords"
+                {...register("keywords")}
+                placeholder="Top 5 Keywords you associate with the movie"
                 type="text"
               />
             </FormControl>
           </ModalBody>
 
-          <ModalFooter gap={3}>
+          <ModalFooter gap={2}>
             <Button variant="primary" type="submit" isLoading={isSubmitting}>
               Save
             </Button>
