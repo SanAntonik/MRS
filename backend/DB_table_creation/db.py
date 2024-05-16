@@ -30,4 +30,7 @@ def init_db(session: Session) -> None:
     # Fill table 'item' with movie data
     df = pd.read_csv(settings.MOVIES_DATA_PATH)
     df["owner_id"] = 1  # set admin to be the owner
+    # Drop the 'id' column to allow the database to auto-generate IDs.
+    # Without this, autoincrement won't update and will start at 1 making errors
+    df = df.drop(columns=["id"])
     df.to_sql(name="item", con=engine, if_exists="append", index=False)
