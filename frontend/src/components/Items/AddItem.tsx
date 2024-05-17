@@ -36,16 +36,29 @@ const AddItem = ({ isOpen, onClose }: AddItemProps) => {
     criteriaMode: "all",
     defaultValues: {
       title: "",
-      franchise: "",
-      release_year: "",
-      genres: "",
+      franchise: null,
+      release_year: null,
+      genres: null,
       vote_average: 0,
       vote_count: 0,
-      director: "",
-      top_actors: "",
-      keywords: "",
+      director: null,
+      top_actors: null,
+      keywords: null,
     },
-  })
+    shouldUnregister: false, // Prevents the fields from unregistering
+    resolver: (data) => {
+      // Convert empty strings to null
+      return {
+        values: Object.fromEntries(
+          Object.entries(data).map(([key, value]) => [
+            key,
+            value === "" ? null : value,
+          ])
+        ),
+        errors: {},
+      };
+    },
+  });
 
   const mutation = useMutation({
     mutationFn: (data: ItemCreate) =>
@@ -122,7 +135,7 @@ const AddItem = ({ isOpen, onClose }: AddItemProps) => {
                 type="text"
               />
             </FormControl>
-            <FormControl mt={3} isRequired isInvalid={!!errors.vote_average}>
+            <FormControl mt={3} isInvalid={!!errors.vote_average}>
               <FormLabel htmlFor="vote_average">Vote Average</FormLabel>
               <Input
                 id="vote_average"
@@ -134,7 +147,7 @@ const AddItem = ({ isOpen, onClose }: AddItemProps) => {
                 step="0.1"
               />
             </FormControl>
-            <FormControl mt={3} isRequired isInvalid={!!errors.vote_count}>
+            <FormControl mt={3} isInvalid={!!errors.vote_count}>
               <FormLabel htmlFor="vote_count">Vote Count</FormLabel>
               <Input
                 id="vote_count"
