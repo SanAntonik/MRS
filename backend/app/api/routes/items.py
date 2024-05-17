@@ -18,27 +18,8 @@ def read_items(
     """
     count_statement = select(func.count()).select_from(Item)
     count = session.exec(count_statement).one()
-    statement = select(Item).offset(skip).limit(limit)
+    statement = select(Item).offset(skip).limit(limit).order_by(Item.id.desc())
     items = session.exec(statement).all()
-    # if current_user.is_superuser:
-    #     count_statement = select(func.count()).select_from(Item)
-    #     count = session.exec(count_statement).one()
-    #     statement = select(Item).offset(skip).limit(limit)
-    #     items = session.exec(statement).all()
-    # else:
-    #     count_statement = (
-    #         select(func.count())
-    #         .select_from(Item)
-    #         .where(Item.owner_id == current_user.id)
-    #     )
-    #     count = session.exec(count_statement).one()
-    #     statement = (
-    #         select(Item)
-    #         .where(Item.owner_id == current_user.id)
-    #         .offset(skip)
-    #         .limit(limit)
-    #     )
-    #     items = session.exec(statement).all()
     return ItemsOut(data=items, count=count)
 
 
