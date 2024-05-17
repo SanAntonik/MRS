@@ -80,7 +80,7 @@ const EditItem = ({ item, isOpen, onClose }: EditItemProps) => {
         <ModalContent as="form" onSubmit={handleSubmit(onSubmit)}>
           <ModalHeader>Edit Item</ModalHeader>
           <ModalCloseButton />
-          <ModalBody pb={6}>
+          <ModalBody pb={4}>
             <FormControl isInvalid={!!errors.title}>
               <FormLabel htmlFor="title">Title</FormLabel>
               <Input
@@ -94,17 +94,77 @@ const EditItem = ({ item, isOpen, onClose }: EditItemProps) => {
                 <FormErrorMessage>{errors.title.message}</FormErrorMessage>
               )}
             </FormControl>
-            <FormControl mt={4}>
-              <FormLabel htmlFor="description">Description</FormLabel>
+            <FormControl mt={3} isInvalid={!!errors.franchise}>
+              <FormLabel htmlFor="franchise">Franchise</FormLabel>
               <Input
-                id="description"
-                {...register("description")}
-                placeholder="Description"
+                id="franchise"
+                {...register("franchise")}
+                type="text"
+              />
+            </FormControl>
+            <FormControl mt={3} isInvalid={!!errors.release_year}>
+              <FormLabel htmlFor="release_year">Release Year</FormLabel>
+              <Input
+                id="release_year"
+                {...register("release_year")}
+                type="text"
+              />
+            </FormControl>
+            <FormControl mt={3} isInvalid={!!errors.genres}>
+              <FormLabel htmlFor="genres">Genres</FormLabel>
+              <Input
+                id="genres"
+                {...register("genres")}
+                type="text"
+              />
+            </FormControl>
+            <FormControl mt={3} isInvalid={!!errors.vote_average}>
+              <FormLabel htmlFor="vote_average">Vote Average</FormLabel>
+              <Input
+                id="vote_average"
+                {...register("vote_average", {
+                  valueAsNumber: true,
+                })}
+                type="number"
+                step="0.1"
+              />
+            </FormControl>
+            <FormControl mt={3} isInvalid={!!errors.vote_count}>
+              <FormLabel htmlFor="vote_count">Vote Count</FormLabel>
+              <Input
+                id="vote_count"
+                {...register("vote_count", {
+                  valueAsNumber: true,
+                })}
+                type="number"
+              />
+            </FormControl>
+            <FormControl mt={3} isInvalid={!!errors.director}>
+              <FormLabel htmlFor="director">Director</FormLabel>
+              <Input
+                id="director"
+                {...register("director")}
+                type="text"
+              />
+            </FormControl>
+            <FormControl mt={3} isInvalid={!!errors.top_actors}>
+              <FormLabel htmlFor="top_actors">Top Actors</FormLabel>
+              <Input
+                id="top_actors"
+                {...register("top_actors")}
+                type="text"
+              />
+            </FormControl>
+            <FormControl mt={3} isInvalid={!!errors.keywords}>
+              <FormLabel htmlFor="keywords">Keywords</FormLabel>
+              <Input
+                id="keywords"
+                {...register("keywords")}
                 type="text"
               />
             </FormControl>
           </ModalBody>
-          <ModalFooter gap={3}>
+          <ModalFooter gap={2}>
             <Button
               variant="primary"
               type="submit"
