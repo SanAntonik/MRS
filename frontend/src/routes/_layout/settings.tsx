@@ -11,7 +11,7 @@ import { createFileRoute } from "@tanstack/react-router"
 import { useQueryClient } from "@tanstack/react-query"
 
 import type { UserOut } from "../../client"
-import Appearance from "../../components/UserSettings/Appearance"
+// import Appearance from "../../components/UserSettings/Appearance"
 import ChangePassword from "../../components/UserSettings/ChangePassword"
 import DeleteAccount from "../../components/UserSettings/DeleteAccount"
 import UserInformation from "../../components/UserSettings/UserInformation"
@@ -19,7 +19,7 @@ import UserInformation from "../../components/UserSettings/UserInformation"
 const tabsConfig = [
   { title: "My profile", component: UserInformation },
   { title: "Password", component: ChangePassword },
-  { title: "Appearance", component: Appearance },
+  // { title: "Appearance", component: Appearance },
   { title: "Danger zone", component: DeleteAccount },
 ]
 
@@ -31,7 +31,8 @@ function UserSettings() {
   const queryClient = useQueryClient()
   const currentUser = queryClient.getQueryData<UserOut>(["currentUser"])
   const finalTabs = currentUser?.is_superuser
-    ? tabsConfig.slice(0, 3)
+    // hide from admin the possibility to delete their account
+    ? tabsConfig.slice(0, 2)
     : tabsConfig
 
   return (
