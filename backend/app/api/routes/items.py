@@ -5,6 +5,7 @@ from sqlmodel import func, select
 
 from app.api.deps import CurrentUser, SessionDep
 from app.models import Item, ItemCreate, ItemOut, ItemsOut, ItemUpdate, Message
+from app.recommender.find_movie import find_movie
 
 router = APIRouter()
 
@@ -33,6 +34,17 @@ def read_item(session: SessionDep, current_user: CurrentUser, id: int) -> Any:
         raise HTTPException(status_code=404, detail="Item not found")
     # if not current_user.is_superuser and (item.owner_id != current_user.id):
     #     raise HTTPException(status_code=400, detail="Not enough permissions")
+    return item
+
+
+@router.get("/str/{input_title}", response_model=ItemOut)
+def find_item_by_title(session: SessionDep, current_user: CurrentUser, input_title: str) -> Any:
+    """
+    Get item by title.
+    """
+    movie_row = find_movie(input_title)
+    movie_row_id = movie_row["id"]
+    item = session.get(Item, movie_row_id)
     return item
 
 
