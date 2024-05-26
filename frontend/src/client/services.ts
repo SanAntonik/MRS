@@ -318,6 +318,10 @@ export type TDataReadItem = {
                 id: number
                 
             }
+export type TDataReadItemByTitle = {
+                input_title: string
+                
+            }
 export type TDataUpdateItem = {
                 id: number
 requestBody: ItemUpdate
@@ -389,6 +393,28 @@ id,
 			url: '/api/v1/items/{id}',
 			path: {
 				id
+			},
+			errors: {
+				422: `Validation Error`,
+			},
+		});
+	}
+
+	/**
+	 * Read Item
+	 * Get item by input_title.
+	 * @returns ItemOut Successful Response
+	 * @throws ApiError
+	 */
+	public static readItemByTitle(data: TDataReadItemByTitle): CancelablePromise<ItemOut> {
+		const {
+input_title,
+} = data;
+		return __request(OpenAPI, {
+			method: 'GET',
+			url: '/api/v1/items/str/{input_title}',
+			path: {
+				input_title
 			},
 			errors: {
 				422: `Validation Error`,
