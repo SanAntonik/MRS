@@ -17,6 +17,7 @@ app.egg-info
 htmlcov
 .cache
 .venv
+*.npy
 
 
 # FRONTEND
