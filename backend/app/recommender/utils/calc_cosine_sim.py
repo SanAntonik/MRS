@@ -38,27 +38,36 @@ def preprocess(text):
     return " ".join(output)
 
 
-def calc_cosine_sim(df=None,
-                    file_path="../backend/app/recommender/data/cosine_sim.npy"):
+def calc_cosine_sim(
+    df=None,
+    file_path="../backend/app/recommender/data/cosine_sim.npy",
+    force_calculation=False
+):
     """
     Summary:
         Calculate the cosine similarity matrix for a DataFrame containing movie features.
         If the cosine similarity matrix exists in the specified file path, read and return it.
         Otherwise, perform the calculations, save the matrix to the file, and return it.
     Parameters:
-        df (DataFrame): DataFrame containing movie data
-        file_path (str): Path to save/read the cosine similarity matrix
+        df (DataFrame): DataFrame containing movie data.
+        file_path (str): Path to save/read the cosine similarity matrix.
+        force_calculation (bool): Forcefully recalculate matrix. Used when appending new movie.
     Returns:
         ndarray: Cosine similarity matrix for the movie features.
     """
-    try:
-        cosine_sim = np.load(file_path)
-        print("File with cosine_sim matrix is already calculated and found")
-        print("Returning it...")
-        return cosine_sim
-    except FileNotFoundError:
-        print("File with cosine_sim matrix not found")
-        print("Calculating the matrix...")
+    if not force_calculation:
+        print("Calculations are forced")
+        print("Calculations aren't forced")
+        try:
+            cosine_sim = np.load(file_path)
+            print("File with cosine_sim matrix is already calculated and found")
+            print("Returning it...")
+            return cosine_sim
+        except FileNotFoundError:
+            print("File with cosine_sim matrix not found")
+            print("Calculating the matrix...")
+    else:
+        print("Calculations are forced")
 
     if df is None:
         df = pd.read_sql_table(

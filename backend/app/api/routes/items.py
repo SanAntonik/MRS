@@ -6,6 +6,7 @@ from sqlmodel import func, select
 from app.api.deps import CurrentUser, SessionDep
 from app.models import Item, ItemCreate, ItemOut, ItemsOut, ItemUpdate, Message
 from app.recommender.utils.find_movie import find_movie
+from app.recommender.utils.calc_cosine_sim import calc_cosine_sim
 from app.recommender.recommender import recommender
 
 router = APIRouter()
@@ -61,7 +62,7 @@ def recommend_movie(session: SessionDep, current_user: CurrentUser, input_title:
 
 
 @router.post("/", response_model=ItemOut)
-def create_item(
+async def create_item(
     *, session: SessionDep, current_user: CurrentUser, item_in: ItemCreate
 ) -> Any:
     """
@@ -73,11 +74,12 @@ def create_item(
     session.add(item)
     session.commit()
     session.refresh(item)
+    calc_cosine_sim(force_calculation=True)
     return item
 
 
 @router.put("/{id}", response_model=ItemOut)
-def update_item(
+async def update_item(
     *, session: SessionDep, current_user: CurrentUser, id: int, item_in: ItemUpdate
 ) -> Any:
     """
@@ -95,6 +97,7 @@ def update_item(
     session.add(item)
     session.commit()
     session.refresh(item)
+    calc_cosine_sim(force_calculation=True)
     return item
 
 
