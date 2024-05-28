@@ -1,6 +1,7 @@
 import re
 
 import nltk
+import numpy as np
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -37,15 +38,28 @@ def preprocess(text):
     return " ".join(output)
 
 
-def calc_cosine_sim(df=None):
+def calc_cosine_sim(df=None,
+                    file_path="../backend/app/recommender/data/cosine_sim.npy"):
     """
     Summary:
         Calculate the cosine similarity matrix for a DataFrame containing movie features.
+        If the cosine similarity matrix exists in the specified file path, read and return it.
+        Otherwise, perform the calculations, save the matrix to the file, and return it.
     Parameters:
         df (DataFrame): DataFrame containing movie data
+        file_path (str): Path to save/read the cosine similarity matrix
     Returns:
         ndarray: Cosine similarity matrix for the movie features.
     """
+    try:
+        cosine_sim = np.load(file_path)
+        print("File with cosine_sim matrix is already calculated and found")
+        print("Returning it...")
+        return cosine_sim
+    except FileNotFoundError:
+        print("File with cosine_sim matrix not found")
+        print("Calculating the matrix...")
+
     if df is None:
         df = pd.read_sql_table(
             "item",
@@ -73,4 +87,5 @@ def calc_cosine_sim(df=None):
     cv = CountVectorizer()
     cv_matrix = cv.fit_transform(df["preproc"])
     cosine_sim = cosine_similarity(cv_matrix, cv_matrix)
+    np.save(file_path, cosine_sim)
     return cosine_sim
