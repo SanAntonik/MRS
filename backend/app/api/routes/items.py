@@ -5,7 +5,8 @@ from sqlmodel import func, select
 
 from app.api.deps import CurrentUser, SessionDep
 from app.models import Item, ItemCreate, ItemOut, ItemsOut, ItemUpdate, Message
-from app.recommender.find_movie import find_movie
+from app.recommender.utils.find_movie import find_movie
+from app.recommender.recommender import recommender
 
 router = APIRouter()
 
@@ -46,6 +47,17 @@ def find_item_by_title(session: SessionDep, current_user: CurrentUser, input_tit
     movie_row_id = movie_row["id"]
     item = session.get(Item, movie_row_id)
     return item
+
+
+@router.get("/recommender/{input_title}", response_model=ItemsOut)
+def recommend_movie(session: SessionDep, current_user: CurrentUser, input_title: str) -> Any:
+    """
+    Recommend movie by input title.
+    """
+    movie_ids = recommender(input_title)
+    statement = select(Item).where(Item.id.in_(movie_ids))
+    items = session.exec(statement).all()
+    return ItemsOut(data=items, count=len(items))
 
 
 @router.post("/", response_model=ItemOut)
