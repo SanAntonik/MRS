@@ -1,11 +1,7 @@
-from datetime import date
-
 from sqlmodel import Field, Relationship, SQLModel
-from sqlalchemy import Column, BigInteger
 
 
 # Shared properties
-# TODO replace email str with EmailStr when sqlmodel supports it
 class UserBase(SQLModel):
     email: str = Field(unique=True, index=True)
     is_active: bool = True
