@@ -423,6 +423,28 @@ input_title,
 	}
 
 	/**
+	 * Read Item
+	 * Get item by input_title.
+	 * @returns ItemOut Successful Response
+	 * @throws ApiError
+	 */
+		public static recommender(data: TDataReadItemByTitle): CancelablePromise<ItemOut> {
+			const {
+	input_title,
+	} = data;
+			return __request(OpenAPI, {
+				method: 'GET',
+				url: '/api/v1/items/recommender/{input_title}',
+				path: {
+					input_title
+				},
+				errors: {
+					422: `Validation Error`,
+				},
+			});
+		}
+
+	/**
 	 * Update Item
 	 * Update an item.
 	 * @returns ItemOut Successful Response
