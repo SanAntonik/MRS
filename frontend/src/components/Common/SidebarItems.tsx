@@ -1,6 +1,6 @@
 import { Box, Flex, Icon, Text, useColorModeValue } from "@chakra-ui/react"
 import { Link } from "@tanstack/react-router"
-import { FiFilm, FiThumbsUp, FiHome, FiSettings, FiUsers } from "react-icons/fi"
+import { FiFilm, FiThumbsUp, FiSearch, FiHome, FiSettings, FiUsers } from "react-icons/fi"
 
 import { useQueryClient } from "@tanstack/react-query"
 
@@ -10,6 +10,7 @@ const items = [
   { icon: FiHome, title: "Dashboard", path: "/" },
   { icon: FiThumbsUp, title: "Recommender", path: "/recommender"},
   { icon: FiFilm, title: "Movies", path: "/items" },
+  { icon: FiSearch, title: "Search for a Movie", path: "/search"},
   { icon: FiSettings, title: "User Settings", path: "/settings" },
 ]
 

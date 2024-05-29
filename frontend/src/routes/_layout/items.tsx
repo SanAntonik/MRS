@@ -61,7 +61,7 @@ function Items() {
               <Table size={{ base: "sm", md: "md" }}>
                 <Thead>
                   <Tr>
-                    <Th>ID</Th>
+                    {/* <Th>ID</Th> */}
                     <Th>Title</Th>
                     {/* <Th>Franchise</Th> */}
                     <Th>Year</Th>
@@ -81,8 +81,8 @@ function Items() {
                 <Tbody>
                   {items.data.map((item) => (
                     <Tr key={item.id}>
-                      <Td>{item.id}</Td>
-                      <Td>{item.title.length > 20 ? `${item.title.substring(0, 20)}...` : item.title}</Td>
+                      {/* <Td>{item.id}</Td> */}
+                      <Td>{item.title.length > 25 ? `${item.title.substring(0, 25)}...` : item.title}</Td>
                       {/* <Td color={!item.franchise ? "ui.dim" : "inherit"}>
                         {item.franchise ? (item.franchise.length > 20 ? `${item.franchise.substring(0, 20)}...` : item.franchise) : "N/A"}
                       </Td> */}
@@ -93,7 +93,7 @@ function Items() {
                         {item.runtime || "N/A"}
                       </Td> */}
                       <Td color={!item.genres ? "ui.dim" : "inherit"}>
-                        {item.genres ? (item.genres.length > 20 ? `${item.genres.substring(0, 20)}...` : item.genres) : "N/A"}
+                        {item.genres ? (item.genres.length > 30 ? `${item.genres.substring(0, 30)}...` : item.genres) : "N/A"}
                       </Td>
                       {/* <Td color={!item.budget ? "ui.dim" : "inherit"}>
                         {item.budget || "N/A"}
@@ -114,7 +114,7 @@ function Items() {
                         {item.director || "N/A"}
                       </Td>
                       <Td color={!item.top_actors ? "ui.dim" : "inherit"}>
-                        {item.top_actors ? (item.top_actors.length > 40 ? `${item.top_actors.substring(0, 40)}...` : item.top_actors) : "N/A"}
+                        {item.top_actors ? (item.top_actors.length > 50 ? `${item.top_actors.substring(0, 50)}...` : item.top_actors) : "N/A"}
                       </Td>
                       {/* <Td color={!item.keywords ? "ui.dim" : "inherit"}>
                         {item.keywords ? (item.keywords.length > 20 ? `${item.keywords.substring(0, 20)}...` : item.keywords) : "N/A"}
