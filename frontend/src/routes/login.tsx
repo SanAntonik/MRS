@@ -1,6 +1,7 @@
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons"
 import {
   Button,
+  Center,
   Container,
   FormControl,
   FormErrorMessage,
@@ -9,9 +10,11 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Link,
   useBoolean,
 } from "@chakra-ui/react"
 import {
+  Link as RouterLink,
   createFileRoute,
   redirect,
 } from "@tanstack/react-router"
@@ -67,7 +70,7 @@ function Login() {
       >
         <Image
           src={Logo}
-          alt="FastAPI logo"
+          alt="MRS logo"
           height="auto"
           maxW="2xs"
           alignSelf="center"
@@ -109,6 +112,11 @@ function Login() {
           </InputGroup>
           {error && <FormErrorMessage>{error}</FormErrorMessage>}
         </FormControl>
+        <Center>
+          <Link as={RouterLink} to="/register" color="blue.500">
+            Don't have an account? Sign up
+          </Link>
+        </Center>
         <Button variant="primary" type="submit" isLoading={isSubmitting}>
           Log In
         </Button>
