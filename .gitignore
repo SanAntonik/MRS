@@ -4,8 +4,8 @@
 *.cfg
 *.zip
 *.csv
-*.pdf
 *.docx
+Additional/
 
 
 # BACKEND
